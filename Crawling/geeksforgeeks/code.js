@@ -2,23 +2,16 @@ const cheerio = require('cheerio');
 const request  = require('request');
 const fs = require('fs');
 const probAndLoop = [
-  ['Warmup-1',0],
-  ['Warmup-2',1],
-  ['String-1',1],
-  ['String-2',1],
-  ['String-3',2],
-  ["Array-1",0],
-  ["Array-2",1],
-  ["Array-3",2],
-  ['Map-1',0],
-  ['Map-2',1],
-  ['Logic-1',0],
-  ['Logic-2',0],
-  ['Functional-1',0],
-  ['Functional-2',0],
-  ["AP-1",0],
-  ["Recursion-1",1],
-  ["Recursion-2",1],
+  ['simple',0],
+  ['array',1],
+  ['list',1],
+  ['string',1],
+  ['dictionary',2],
+  ["tuple",0],
+  ["searchingandsorting",1],
+  ["pattern",2],
+  ['datetime',0],
+  ['moreprograms',1]
 ];
 //Logic1 및 Logic2는 Loop가 있는지 없는지 재확인 필요.
 //만약 Loop가 있을 시 해당 항목을 -1로 변경 후 수작업
@@ -39,9 +32,10 @@ const crawl_prob = async function(href,loop){
 const crawl_chapter = async function(filename,loop){
   return new Promise((resolve,reject)=>{
     request({method:'GET',
-     url:'https://codingbat.com/java/'+filename,
+     url:'https://www.geeksforgeeks.org/python-programming-examples/',
      }, (err,res,body)=>{
      if(err) return console.error(err);
+     for()
      let $ = cheerio.load(body);
      let links = $('table > tbody > tr > td > a').toArray();
      let promises = [];
