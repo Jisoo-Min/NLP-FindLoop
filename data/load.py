@@ -5,6 +5,10 @@ import random
 
 from enum import Enum
 
+"""Label
+All the labels we made are in Label class.
+Each labels is mapped as a number.
+"""
 class Label(Enum):
     B_2param  = 0
     B_2param2 = 1
@@ -20,6 +24,20 @@ class Label(Enum):
     O         = 11
 
 
+"""get_data
+Import data that is correspoding to categories.
+We have 3 categories, "train", "valid", and "test".
+
+@split_lenth  : Default value is 62. We have 307 data in total. 
+			   Train-set, validation-set, and test-set have 186, 62, and 59 data, respectively.
+@original_key : Get all question numbers as keys. It is shuffled to split into datasets.
+
+
+
+return two lists. 
+train_lex, valid_lex, test_lex : Questions(queries) mapped to a number in the voca-set
+train_y,   valid_y,   test_y   : Answers mapped to the label (Label Class)
+"""
 def get_data(data_category):
 
 	with open('./is13/data/data.json') as f:
@@ -28,16 +46,15 @@ def get_data(data_category):
 	with open('./is13/data/label.json') as f:
 		data_slots = json.load(f)
     
-	split_length = 42
+	split_length = 62
     
 	original_key = list(data_query.keys())
 	random.shuffle(original_key)
 
-   
     
 	if (data_category == 'train'):  
 		#split train_data
-		train_keys = original_key[:split_length*4]
+		train_keys = original_key[:split_length*3]
 		# select data by keys
 		train_data = [data_query[i] for i in train_keys if i in data_query] 
 
@@ -49,7 +66,7 @@ def get_data(data_category):
         
 	elif (data_category == 'valid'):  
 		#split valid_keys
-		valid_keys   = original_key[split_length*4:split_length*5]
+		valid_keys   = original_key[split_length*3: split_length*4]
 		# select data by keys
 		valid_data = [data_query[i] for i in valid_keys if i in data_query] 
 
@@ -60,7 +77,7 @@ def get_data(data_category):
 
 	elif (data_category == 'test'):  
 		#split test_keys
-		test_keys  = original_key[split_length*5:]
+		test_keys  = original_key[split_length*4:]
 		# select data by keys
 		test_data = [data_query[i] for i in test_keys if i in data_query]
 
