@@ -305,14 +305,12 @@ class ScoreDB(QWidget):
 
         elif button == "+":
             if self.numOfLabel < maxLabel :
-                print("쌉가능")
                 label = self.label_edit.text()
                 self.numOfLabel += 1
                 self.label_edit.setText("")
                 self.changeLabelset(self.num, label)
                 self.showDB()
             else:
-                print("쌉불가능")
                 self.msgBox("Too Many Labels")
 
             self.numOfLabel_title.setText(str(self.numOfLabel - 1) + " labels : ")
