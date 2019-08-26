@@ -66,6 +66,8 @@ if __name__ == '__main__':
     # Instanciate the model
     numpy.random.seed(s['seed'])
     random.seed(s['seed'])
+    
+    # Load RNN model
     rnn = model(    nh = s['nhidden'],
                     nc = nclasses,
                     ne = vocasize,
@@ -82,8 +84,10 @@ if __name__ == '__main__':
         s['ce'] = e
         tic = time.time()
         for i in range(nsentences):
+            
+            # Get window-size words
             cwords = contextwin(train_lex[i], s['win'])
-
+            
             words  = map(lambda x: numpy.asarray(x).astype('int32'),\
                          minibatch(cwords, s['bs']))
 
