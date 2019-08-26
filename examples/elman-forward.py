@@ -8,7 +8,6 @@ import pprint
 import numpy as np
 sys.path.append(".")
 from is13.data import load
-from is13.data import load_mydata
 from is13.rnn.elman import model
 from is13.metrics.accuracy import conlleval
 from is13.utils.tools import shuffle, minibatch, contextwin
@@ -47,16 +46,16 @@ if __name__ == '__main__':
                 8: "I_3param",  9: "I_param",   10: "I_param2", 11: "O"}
 
     # Load vacabulary set
-    vocaset = load_mydata.get_voca()
+    vocaset = load.get_voca()
 
     # Make (idx: word) sets from vocabulary set
     idx2word = { i : vocaset[i] for i in range(0, len(vocaset)) }
 
 
     # Load the dataset
-    train_lex, train_y = load_mydata.get_data("train")
-    valid_lex, valid_y = load_mydata.get_data("valid")
-    test_lex,  test_y  = load_mydata.get_data("test")
+    train_lex, train_y = load.get_data("train")
+    valid_lex, valid_y = load.get_data("valid")
+    test_lex,  test_y  = load.get_data("test")
 
     # Set vacabulary size, classes, and size of dataset
     vocasize = 1485
